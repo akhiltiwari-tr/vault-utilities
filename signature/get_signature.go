@@ -10,9 +10,10 @@ import (
 	"log"
 	"math/big"
 
+	"vault-utilities/signature/rfc6979"
+
 	secp256k1 "github.com/btcsuite/btcd/btcec"
 	"github.com/btcsuite/btcutil"
-	"github.com/scorum/scorum-go/sign/rfc6979"
 )
 
 func isOdd(a *big.Int) bool {
@@ -116,15 +117,16 @@ func recoverKeyFromSignature(curve *secp256k1.KoblitzCurve, sig *secp256k1.Signa
 	}, nil
 }
 
+// SignBufferSha256 returns Signature of a valid  byte array, Does not validate a transaction digest.
 func SignBufferSha256(bufSha256 []byte, privateKey *ecdsa.PrivateKey) []byte {
-	var buf_sha256_clone = make([]byte, len(bufSha256))
-	copy(buf_sha256_clone, bufSha256)
+	var bufSha256Clone = make([]byte, len(bufSha256))
+	copy(bufSha256Clone, bufSha256)
 
 	nonce := 0
 	// int(time.Now().Unix()
 	for {
 		// r, s, err := rfc6979.
-		r, s, err := rfc6979.SignECDSA(privateKey, buf_sha256_clone, sha256.New, nonce)
+		r, s, err := rfc6979.SignECDSA(privateKey, bufSha256Clone, sha256.New, nonce)
 		nonce++
 		if err != nil {
 			log.Println(err)
@@ -143,11 +145,11 @@ func SignBufferSha256(bufSha256 []byte, privateKey *ecdsa.PrivateKey) []byte {
 			// the curve, and thus correctly sized.
 			key := (*secp256k1.PrivateKey)(privateKey)
 			curve := secp256k1.S256()
-			max_counter := 4 //max_counter := (curve.H+1)*2
-			for i := 0; i < max_counter; i++ {
+			maxCounter := 4 //maxCounter := (curve.H+1)*2
+			for i := 0; i < maxCounter; i++ {
 				//for i := 0; i < (curve.H+1)*2; i++ {
 				//for i := 0; ;i++ {
-				pk, err := recoverKeyFromSignature(curve, ecsignature, buf_sha256_clone, i, true)
+				pk, err := recoverKeyFromSignature(curve, ecsignature, bufSha256Clone, i, true)
 
 				if err == nil && pk.X.Cmp(key.X) == 0 && pk.Y.Cmp(key.Y) == 0 {
 					//result := make([]byte, 1, 2*curve.byteSize+1)
@@ -201,22 +203,22 @@ func getSignature(transactionDigest []byte, wifs []string) []string {
 	return sigsHex
 }
 
-// returns sha256 hash for the transaction hex with network's chain id as a prefix.
-func getDigestHash(digest []byte) []byte {
+// GetDigestHash returns sha256 hash for the input. Expected I/P is of the form {network's chain id + transaction hex}.
+func GetDigestHash(digest []byte) []byte {
 	hashedDigest := sha256.New()
 	hashedDigest.Write(digest)
 	return hashedDigest.Sum(nil)
 }
 
 func main() {
-	digestHex := "3aef3997194701308d57a65214a7a015d98382ab66a9bc0d655de80842b6bfc5661e883d23630c37055c010073e31f00000000000011178096980000000000000102c0ded2bc1f1305fb0faac5e6c03ee3a1924234985427b6167ca569d13df435cf033b4fa94b8e1e33a3040507e678810d8f5c388704230061c7d55ad4c3c97daf11b235c75e7467010010e7a230c80f58a5d3aa647bdb5934bc370000"
+	digestHex := "3aef3997194701308d57a65214a7a015d98382ab66a9bc0d655de80842b6bfc5a11616933bc0dfd3065c010073e31f00000000000011178096980000000000000102c0ded2bc1f1305fb0faac5e6c03ee3a1924234985427b6167ca569d13df435cf033b4fa94b8e1e33a3040507e678810d8f5c388704230061c7d55ad4c3c97daf115b5f4b867867010010a9dc406a875bca71678808d7079e08c50000"
 	wifs := make([]string, 1)
 	wifs[0] = "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"
 	digest, err := hex.DecodeString(digestHex)
 	if err != nil {
 		panic(err)
 	}
-	hashedDigest := getDigestHash(digest)
+	hashedDigest := GetDigestHash(digest)
 	fmt.Printf("The signature for the specified hex is %v", getSignature(hashedDigest, wifs))
 }
 

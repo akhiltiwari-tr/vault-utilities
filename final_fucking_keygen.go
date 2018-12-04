@@ -10,10 +10,42 @@ import (
 	"golang.org/x/crypto/ripemd160"
 )
 
+func genBTSWifPrivateKey(brainKey string) []byte {
+	h := sha512.New()
+	h.Write([]byte(brainKey + " " + "0"))
+	pk1 := h.Sum(nil)
+
+	hdash := sha256.New()
+	hdash.Write(pk1)
+	privKey := hdash.Sum(nil)
+
+	return privKey
+}
+
+// GenBTSWifPrivateKey returns BTS keys from mnemonics.
+func GenBTSWifPrivateKey(privKey []byte) string {
+	// converting  the private key to a btckey.PrivateKey format
+	var structuredPrivKey btckey.PrivateKey
+	structuredPrivKey.FromBytes(privKey)
+	return structuredPrivKey.ToWIF()
+}
+
+// GenBTSPublicKey returns Public key for bitshares
+func GenBTSPublicKey(structuredPrivKey btckey.PrivateKey) string {
+	h := ripemd160.New()
+	h.Write(structuredPrivKey.PublicKey.ToBytes())
+	checkSum := h.Sum(nil)
+	addt := append(structuredPrivKey.PublicKey.ToBytes(), checkSum[0:4]...)
+	pubKey := "BTS" + base58.Encode(addt)
+	fmt.Println(pubKey)
+	return "BTS" + base58.Encode(addt)
+}
+
 func main() {
 
 	// creating a private key from a mnemonic
 	brainKey := "model margin spot canyon announce cricket lesson genre violin tuition oak love promote obscure hat glass chronic marriage spatial castle rescue sauce capable wheat"
+
 	h := sha512.New()
 	h.Write([]byte(brainKey + " " + "0"))
 	pk1 := h.Sum(nil)

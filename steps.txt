@@ -28,7 +28,8 @@ L3Qyd8TLb4FXDf1key3viEuc8Mrf91yjvY2nhA16mZEDGq8nqEeJ
 {"id":2,"method":"call","params":[1,"database",[]]}
 {"id":3,"method":"call","params":[1,"network_broadcast",[]]}
 
-{"id":4,"method":"call","params":[3,"broadcast_transaction",[{"ref_block_num": 62238, "ref_block_prefix": 2226074883, "expiration": "2018-12-13T19:00:00", "operations": [[0,{"fee": {"amount": 10420,"asset_id": "1.3.0"},"from": "1.2.17","to": "1.2.23", "amount": {"amount": 4400000,"asset_id": "1.3.0"}, "extensions": []}]],"extensions": [], "signatures": ["1f32d42147b4e5a39606168fcee42c082407ccb3361c2294dc87a620fbf216581b786d0985b5216e23792aa8dfd6cdec5c15335ae716884db78fe5a98708ea41de"]}]]}
+{"id":4,"method":"call","params":[3,"broadcast_transaction",[{"ref_block_num": 2244, "ref_block_prefix": 1805973522, "expiration": "2018-12-04T08:22:13", "operations": [[0,{"fee": {"amount": 2089843,"asset_id": "1.3.0"},"from": "1.2.17","to": "1.2.23", "amount": {"amount": 10000000,"asset_id": "1.3.0"},"memo": {
+"from": "BTS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV", "message":"101618b18b795a2fbf72209df8162106", "nonce":395241399507552, "to":"BTS7HMZ7UCfcgd9jEaGAWhcXjEqngbeQ9KNFENkMzy6avVQGqu9pf"}, "extensions": []}]],"extensions": [], "signatures": ["204b8249d6d80ca32e86ef544b9b8cdb306342013d93c85fdd9b17b26bd982bca27d65af3b75887b7f17ccd94a243505803cc3662d6b87e8addbbf9d1e046d1e0a"]}]]}
 
 
 {'ref_block_num': 62238, 'ref_block_prefix': 2226074883, 'expiration': '2018-12-13T19:00:00', 'operations': [[0, {'fee': {'amount': 10420, 'asset_id': '1.3.0'}, 'from': '1.2.17', 'to': '1.2.23', 'amount': {'amount': 4400000, 'asset_id': '1.3.0'}, 'extensions': []}]], 'extensions': [], 'signatures': ['1f472c20412cf61e6df7b6be07f6fc3abb8b7ddb9202e049a277ae05d9d5f7babf45bc8a6d8b2d2ce4c5673d4b459b38da15230827b7888613035a0d79364197a7']}
