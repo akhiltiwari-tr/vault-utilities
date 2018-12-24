@@ -46,7 +46,7 @@ func GenBTSPublicKey(structuredPrivKey btckey.PrivateKey) string {
 func main() {
 
 	// creating a private key from a mnemonic
-	brainKey := "crop fire buddy magic creek build middle digital sail state priority unhappy upper advance share"
+	brainKey := "hybrid easily okay write size tape clown whale dash admit leader ask weekend winner brown"
 
 	h := sha512.New()
 	h.Write([]byte(brainKey))
@@ -60,7 +60,7 @@ func main() {
 	// converting  the private key to a btckey.PrivateKey format
 	var structuredPrivKey btckey.PrivateKey
 	structuredPrivKey.FromBytes(privKey)
-	// structuredPrivKey.FromWIF("5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3")
+	// structuredPrivKey.FromWIF("5K44658mCyJQtmT2TtwgDJtCmduDGibq64mQ9MBBQVWtWSMLvYu")
 
 	fmt.Println("#######Print results for btckey.PrivateKey format#######")
 	fmt.Printf("btckey.PrivateKey.ToWIF() {BITSHARES WIF KEY}:= %v \n", structuredPrivKey.ToWIF())
@@ -101,13 +101,4 @@ func main() {
 
 }
 
-// BTSFAbAx7yuxt725qSZvfwWqkdCwp9ZnUama
-// BTSFAbAx7yuxt725qSZvfwWqkdCwp9ZnUama
-// BTSFAbAx7yuxt725qSZvfwWqkdCwp9ZnUama
-// BTSFAbAx7yuxt725qSZvfwWqkdCwp9XKEFvs
-// BTSFN9r6VYzBK8EKtMewfNbfiGCr56pHDBFi
-
-// priv key for our account pk=5Jt6AzJfm41ynUGfHV75sJvXtiRiaLuP92ra54ZmnFYiCKr9hw2
-// uuid : bg780r5gouhijfg0vtq0
-// address:"BTSVwfbNwjx9X3XvQKuDG6n89RCaewwWFkH",
-// publicKey: "BTS89nzTzp3YGGTzMoWq398gzrFaBSpn7mBxXYQwKhHDv4PmXpbae",
+// hybrid easily okay write size tape clown whale dash admit leader ask weekend winner brown ==> mnemonic for nathan

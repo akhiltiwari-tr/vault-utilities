@@ -41,7 +41,7 @@ func DerivePrivateKey(mnemonic string) (string, error) {
 }
 
 func main() {
-	brainKey := "crop fire buddy magic creek build middle digital sail state priority unhappy upper advance share"
+	brainKey := "anger name fall borrow wagon hammer reason excuse boss ten dawn leader calm crisp anchor"
 
 	privKey, _ := DerivePrivateKey(brainKey)
 

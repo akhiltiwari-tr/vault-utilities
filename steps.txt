@@ -27,6 +27,11 @@ L3Qyd8TLb4FXDf1key3viEuc8Mrf91yjvY2nhA16mZEDGq8nqEeJ
 {"id":1,"method":"call","params":[1,"login",["",""]]}
 {"id":2,"method":"call","params":[1,"database",[]]}
 {"id":3,"method":"call","params":[1,"network_broadcast",[]]}
+{"id":4,"method":"call","params":[1,"history",[]]}
+
+
+[{"id":1,"method":"call","params":[1,"login",["",""]]}, {"id":2,"method":"call","params":[1,"history",[]]}, {"id":4,"method":"call","params":[4, "get_account_history_by_operations", ["nathan", ["0"], 0, 100]]}]
+
 
 {"id":4,"method":"call","params":[3,"broadcast_transaction",[{"ref_block_num": 5793, "ref_block_prefix": 3225129750, "expiration": "2018-12-04T19:22:07", "operations": [[0,{"fee": {"amount": 2089843,"asset_id": "1.3.0"},"from": "1.2.17","to": "1.2.23", "amount": {"amount": 10000000,"asset_id": "1.3.0"},"memo": {"from": "BTS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV", "message":"a9dc406a875bca71678808d7079e08c5", "nonce":395242323533659, "to":"BTS7HMZ7UCfcgd9jEaGAWhcXjEqngbeQ9KNFENkMzy6avVQGqu9pf"}, "extensions": []}]],"extensions": [], "signatures": ["1f60e1586a7b96b200d12d1ab8d5a0a126f527249306ea68f0af2988f617c3b5bd3fdbcab56ae675f4815c09cc4284f64ae9b12c1055586cd3f756734137da77b1"]}]]}
 
@@ -64,19 +69,41 @@ vault_plugin
 
 
 anger name fall borrow wagon hammer reason excuse boss ten dawn leader calm crisp anchor
-{
-    "request_id": "379016b5-abab-f4be-9ec3-300f4e02a104",
-    "lease_id": "",
-    "renewable": false,
-    "lease_duration": 0,
-    "data": {
-        "uuid": "bg7r3rdgouhutd31to4g"
-    },
-    "wrap_info": null,
-    "warnings": null,
-    "auth": null
-}
 
-{BITSHARES WIF KEY}:= 5JSfFtMqneZozrGYhyRmwwvoGnCa4NFUM13PxzXZZTvXpQDUG9E
-public key BTS6scqPj3axeDSMC265saxAMvQwqyzsaXgEJWjrGQCAMDUK2zf72
-Address:  BTS6iM8SDBypVuUKsMRpeaRS9PtnhSgAV9is
+
+curl --data '{"jsonrpc": "2.0", "method": "call", "params": [0, "lookup_account_names", [["nathan"]]], "id": 1}' http://localhost:11011/rpc
+
+curl --data '{"jsonrpc": "2.0", "method": "call", "params": [0, "get_account_balances", ["1.2.17", ["1.3.0"]]], "id": 1}' http://localhost:11011
+
+curl --data '{"jsonrpc": "2.0", "method": "call", "params": [1,"login",["",""]], "id": 4}' http://localhost:11011
+
+curl --data '{"jsonrpc": "2.0", "method": "call", "params": [1,"database",[]], "id": 4}' http://localhost:11011
+
+
+curl --data '{"jsonrpc": "2.0", "method": "call", "params": [1,"network_broadcast",[]], "id": 4}' http://localhost:11011
+
+
+curl --data '{"jsonrpc": "2.0", "method": "call", "params": [1,"history",[2, "get_account_history_by_operations", ["nathan", ["0"], 0, 100]]], "id": 4}' http://localhost:11011
+
+{"id":4,"jsonrpc":"2.0","result":{"total_count":43,"operation_history_objs":[
+
+
+
+
+
+{"coinType":0,"path":"m/44'/0'/0'/0/0","payload":  "{\"inputs\":[{\"txhash\":\"81b4c832d70cb56ff957589752eb412a4cab78a25a8fc52d6a09e5bd4404d48a\",\"vout\":0},{\"txhash\":\"9dd5264b09bd4aebc1d74b776e6669ba3f0e381ef2992c9434e4d0bee3068edb\",\"vout\":0}],\"outputs\":[{\"address\":\"1KKKK6N21XKo48zWKuQKXdvSsCf95ibHFa\",\"amount\":91234},{\"address\":\"1HPvK7CAYeHzCdBMBkuXeEsXdvX64yMkoE\",\"amount\":91234}]}","uuid":"bgcultlgouhs7n4oku00"}
+
+
+{"coinType":240,"path":"","payload":"{\"transactionDigest\":\"3aef3997194701308d57a65214a7a015d98382ab66a9bc0d655de80842b6bfc5aede09dd6e161ca9095c0105d1d8070000000000001111050007616e6b69743131010000000001021500e918e7ca8c63e40472c9a2ab28665d06a41e78d034ee1b2ff2b3635d02e5010000010000000001021500e918e7ca8c63e40472c9a2ab28665d06a41e78d034ee1b2ff2b3635d02e5010000021500e918e7ca8c63e40472c9a2ab28665d06a41e78d034ee1b2ff2b3635d02e5050000000000000000\"}","uuid":"bg71vptgouhtl3cu31p0"}
+
+
+{"coinType":60,"path":"m/44'/0'/0'/0/0","payload": "{\"nonce\":0,\"value\":1000000000,\"gasLimit\":21000,\"gasPrice\":30000000000,\"to\":\"0x4592d8f8d7b001e72cb26a73e4fa1806a51ac79d\",\"data\":\"\",\"chainId\":1}","uuid":"bgcultlgouhs7n4oku00"}
+
+
+
+
+
+
+
+
+
